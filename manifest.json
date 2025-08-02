@@ -1,0 +1,30 @@
+{
+    "name": "Pomodoro Youtube",
+    "description": "Мой самописный интервальный таймер для ютуба",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "script.js"
+            ]
+        }
+    ],
+    "action": {
+        "default_icon": "icon.png",
+        "default_popup": "pomodorobody.html"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "dzyn.mp3"
+            ],
+            "matches": [
+                "https://www.youtube.com/*"
+            ]
+        }
+    ]
+}
