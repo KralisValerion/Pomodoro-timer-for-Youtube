@@ -3,6 +3,8 @@ let notafiction = null;
 
 let finderBar = setInterval(() => {
     if (document.querySelector("#center")) {
+        clearInterval(finderBar)
+
         let button = document.createElement("div")
         button.class = "pomodoro-button"
         button.style = "width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1);; border-radius: 50%; margin-left: 5px; cursor: pointer;"
@@ -78,27 +80,39 @@ let finderBar = setInterval(() => {
         })
         new PomodoroTimer()
 
-        clearInterval(finderBar)
     }
 
 }, 2000)
 
+
 class PomodoroTimer {
     constructor() {
-        console.log("скрипт инициализирован");
 
         this.createUI()
 
 
         document.querySelector(".button-start").addEventListener('click', () => this.startTimer())
         document.querySelector(".button-end").addEventListener('click', () => this.stopTimer())
-        document.querySelector(".ytp-play-button").addEventListener('click', () => this.VideoIsPlay = !this.VideoIsPlay);
-        document.querySelector(".html5-video-player").addEventListener("click", () => this.VideoIsPlay = !this.VideoIsPlay)
+
         document.addEventListener("keydown", (e) => {
             if (e.code == "keyk" || e.code == "Space") {
                 this.VideoIsPlay = !this.VideoIsPlay;
             }
         })
+
+        this.finderElementsPlayer = setInterval(() => {
+
+            if (document.querySelector(".ytp-play-button") && document.querySelector("#container")) {
+                clearInterval(this.finderElementsPlayer)
+
+                document.querySelector(".ytp-play-button").addEventListener('click', () => this.VideoIsPlay = !this.VideoIsPlay);
+                document.querySelector(".html5-video-player").addEventListener("click", () => this.VideoIsPlay = !this.VideoIsPlay)
+
+
+            }
+
+        }, 2000)
+
 
         this.clickEvent = new Event("click");
         this.playbtn;
