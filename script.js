@@ -92,7 +92,13 @@ class PomodoroTimer {
 
         document.querySelector(".button-start").addEventListener('click', () => this.startTimer())
         document.querySelector(".button-end").addEventListener('click', () => this.stopTimer())
-
+        document.querySelector(".ytp-play-button").addEventListener('click', () => this.VideoIsPlay = !this.VideoIsPlay);
+        document.querySelector(".html5-video-player").addEventListener("click", () => this.VideoIsPlay = !this.VideoIsPlay)
+        document.addEventListener("keydown", (e) => {
+            if (e.code == "keyk" || e.code == "Space") {
+                this.VideoIsPlay = !this.VideoIsPlay;
+            }
+        })
 
         this.clickEvent = new Event("click");
         this.playbtn;
@@ -109,7 +115,7 @@ class PomodoroTimer {
 
 
         this.isWork;
-        this.VideoIsPlay;
+        this.VideoIsPlay = true;
     }
 
 
@@ -253,8 +259,6 @@ class PomodoroTimer {
         if (!this.VideoIsPlay) {
             this.playbtn.dispatchEvent(this.clickEvent)
             this.VideoIsPlay = true;
-            console.log("Проигрывание запущено");
-
         }
 
 
@@ -279,7 +283,6 @@ class PomodoroTimer {
             document.querySelector('.timer').textContent = minuts + ":" + seconds
 
             if (currentTime <= this.start) {
-                console.log("рабочий интервал закончен");
                 notafiction.currentTime = 0;
                 notafiction.play();
 
@@ -297,7 +300,6 @@ class PomodoroTimer {
         if (this.VideoIsPlay) {
             this.playbtn.dispatchEvent(this.clickEvent)
             this.VideoIsPlay = false;
-            console.log("Проигрывание остановлено");
 
         }
 
@@ -323,7 +325,6 @@ class PomodoroTimer {
             document.querySelector('.timer').textContent = minutes + ":" + seconds
 
             if (currentTime <= this.start) {
-                console.log("интервал отдыха закончен");
                 notafiction.currentTime = 0;
                 notafiction.play();
 
@@ -344,7 +345,6 @@ class PomodoroTimer {
         this.workminutes = document.querySelector(".form-input_work").value;
         this.chillminutes = document.querySelector(".form-input_chill").value;
 
-        this.VideoIsPlay = (this.playbtn.title == "Пауза (k)") ? true : false;
         this.startWorkinterval();
     }
 
@@ -355,7 +355,6 @@ class PomodoroTimer {
         if (this.VideoIsPlay) {
             this.playbtn.dispatchEvent(this.clickEvent)
             this.VideoIsPlay = false;
-            console.log("Проигрывание остановлено");
 
         }
         this.isWork = false;
